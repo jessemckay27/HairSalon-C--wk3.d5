@@ -113,8 +113,6 @@ namespace HairSalonProject
       return foundStylist;
     }
 
-
-
     public static void DeleteAll()
     {
       SqlConnection conn = DB.Connection();
@@ -123,7 +121,6 @@ namespace HairSalonProject
       cmd.ExecuteNonQuery();
       conn.Close();
     }
-
 
     public int GetId()  //getter for stylist id
     {

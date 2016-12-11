@@ -73,5 +73,18 @@ namespace HairSalonProject
       // Client.DeleteAll();
       Stylist.DeleteAll();
     }
+
+    [Fact]
+    public void Test_Find_GetClientsOfStylist()
+    {
+      Stylist newStylist = new Stylist("Mickey Hart");
+      newStylist.Save();
+
+      Client newClient1 = new Client("Donald Trump", newStylist.GetId());
+      Client newClient2 = new Client("Hillary Clinton", newStylist.GetId());
+
+      List<Client> testClientList = new List<Client> {newClient1, newClient2};
+      List<Client> resultClientList = newStylist.GetClients();
+    }
   }
 }
