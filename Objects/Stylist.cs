@@ -78,6 +78,62 @@ namespace HairSalonProject
       }
     }
 
+    public static Stylist Find(int id)
+    {
+      SqlConnection conn = DB.Connection();  //creates connection object
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("SELECT * FROM stylists WHERE id = @StylistId;", conn);
+      SqlParameter stylistIdParameter = new SqlParameter();
+      stylistIdParameter.ParameterName = "@StylistId";
+      stylistIdParameter.Value = id.ToString();
+      cmd.Parameters.Add(stylistIdParameter);
+      SqlDataReader rdr = cmd.ExecuteReader();
+
+      int foundStylistId = 0;
+      string foundStylistName =  null;
+
+      while(rdr.Read())
+      {
+        foundStylistId = rdr.GetInt32(0);
+        foundStylistName = rdr.GetString(1);
+      }
+
+      Stylist foundStylist = new Stylist(foundStylistName, foundStylistId);
+
+      if (rdr != null)
+      {
+        rdr.Close();
+      }
+      if(conn != null)
+      {
+        conn.Close();
+      }
+
+      return foundStylist;
+    }
+
+
+
+    public static void DeleteAll()
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+      SqlCommand cmd = new SqlCommand("DELETE FROM stylists;", conn);
+      cmd.ExecuteNonQuery();
+      conn.Close();
+    }
+
+
+    public int GetId()  //getter for stylist id
+    {
+      return _id;
+    }
+
+    public string GetName()  //gett for stylist name
+    {
+      return _name;
+    }
 
     public override bool Equals(System.Object otherStylist)
     {
@@ -97,25 +153,6 @@ namespace HairSalonProject
     public override int GetHashCode()  //overrides hash code default behavior
     {
       return _name.GetHashCode();
-    }
-
-    public int GetId()  //getter for stylist id
-    {
-      return _id;
-    }
-
-    public string GetName()  //gett for stylist name
-    {
-      return _name;
-    }
-
-    public static void DeleteAll()
-    {
-      SqlConnection conn = DB.Connection();
-      conn.Open();
-      SqlCommand cmd = new SqlCommand("DELETE FROM stylists;", conn);
-      cmd.ExecuteNonQuery();
-      conn.Close();
     }
   }
 }
