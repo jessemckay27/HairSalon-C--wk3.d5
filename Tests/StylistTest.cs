@@ -20,8 +20,21 @@ namespace HairSalonProject
       Assert.Equal(0, result);
     }
 
+    [Fact]
+    public void Test_Save_SavesStylistToDatabase()
+    {
+      Stylist newStylist = new Stylist("Jerry Garcia");
+      newStylist.Save();
+
+      List<Stylist> result = Stylist.GetAll();
+      List<Stylist> testList = new List<Stylist>{newStylist};
+
+      Assert.Equal(testList, result);
+    }
+
     public void Dispose()
     {
+      // Client.DeleteAll();
       Stylist.DeleteAll();
     }
   }

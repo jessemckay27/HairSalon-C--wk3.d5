@@ -7,57 +7,77 @@ namespace HairSalonProject
 {
   public class Stylist
   {
-    private string _name;
-    private int _id;
+    private string _name;  //placeholder
+    private int _id;  //placeholder
 
-    public Stylist(string name, int id = 0)
+    public Stylist(string name, int id = 0)  //constructor
     {
       _name = name;
       _id = id;
     }
 
-    public static List<Stylist> GetAll()
+    public static List<Stylist> GetAll()  //makes list of all stylists
     {
-      List<Stylist> allStylists = new List<Stylist>{};
+      List<Stylist> allStylists = new List<Stylist>{};  //creates empty list to hold stylists
 
-      SqlConnection conn = DB.Connection();
-      conn.Open();
+      SqlConnection conn = DB.Connection();  //creates connection object
+      conn.Open();  //opens connection
 
-      SqlCommand cmd = new SqlCommand("SELECT * FROM stylists;", conn);
-      SqlDataReader rdr = cmd.ExecuteReader();
+      SqlCommand cmd = new SqlCommand("SELECT * FROM stylists;", conn);  //creates sql command object, gets all info from stylists;
+      SqlDataReader rdr = cmd.ExecuteReader();    //creates object to execute commands
 
-      // int id = 0;
-      // string name = null;
+      // string name = null;  //sets name as null in case of empty
 
-      while(rdr.Read())
+      while(rdr.Read())   //loop for execute
       {
-        string stylistName = rdr.GetString(0);
-        int stylistId = rdr.GetInt32(0);
-        Stylist newStylist = new Stylist(stylistName, stylistId);
-        allStylists.Add(newStylist);
+        string stylistName = rdr.GetString(1);  //placeholder for name from database
+        int stylistId = rdr.GetInt32(0);  //placeholder for id from database
+        Stylist newStylist = new Stylist(stylistName, stylistId);  //constructor for new stylist with info passed
+        allStylists.Add(newStylist);  // adds the new stylist to the empty list of stylists
       }
 
       if (rdr != null)
       {
-        rdr.Close();
+        rdr.Close();  //closes reader object when done
       }
 
       if (conn != null)
       {
-        conn.Close();
+        conn.Close();  //closes connection when done
       }
 
-      return allStylists;
+      return allStylists;  //returns list of stylists
     }
 
-    public static void DeleteAll()
-		{
-			SqlConnection conn = DB.Connection();
-			conn.Open();
-			SqlCommand cmd = new SqlCommand("DELETE FROM stylists;", conn);
-			cmd.ExecuteNonQuery();
-			conn.Close();
+    public void Save()
+    {
+      SqlConnection conn = DB.Connection();  //creates connection object
+      conn.Open();  //opens connection
+
+      SqlCommand cmd = new SqlCommand("INSERT INTO stylists (name) OUTPUT INSERTED.id VALUES (@StylistName);", conn);  //creates new cmd object to add database values
+
+      SqlParameter nameParameter = new SqlParameter();
+      nameParameter.ParameterName = "@StylistName";   //sets paramater objects Name parameter
+      nameParameter.Value = this.GetName();   //sets paramaeter objects Value parameter
+      cmd.Parameters.Add(nameParameter);  //sets cmd object paramaters and calls Add to pass them
+
+      SqlDataReader rdr = cmd.ExecuteReader();  //creates object to execute commands
+
+
+      while(rdr.Read())
+      {
+        this._id = rdr.GetInt32(0);
+      }
+      if (rdr != null)
+      {
+        rdr.Close();
+      }
+      if(conn != null)
+      {
+        conn.Close();
+      }
     }
+
 
     public override bool Equals(System.Object otherStylist)
     {
@@ -69,25 +89,33 @@ namespace HairSalonProject
       {
         Stylist newStylist = (Stylist) otherStylist;
         bool idEquality = this.GetId() == newStylist.GetId();
-        bool nameEquality = this.GetName() ==newStylist.GetName();
+        bool nameEquality = this.GetName() == newStylist.GetName();
         return (idEquality && nameEquality);
       }
     }
 
-    public override int GetHashCode()
+    public override int GetHashCode()  //overrides hash code default behavior
     {
       return _name.GetHashCode();
     }
 
-    public int GetId()
+    public int GetId()  //getter for stylist id
     {
       return _id;
     }
 
-    public string GetName()
+    public string GetName()  //gett for stylist name
     {
       return _name;
     }
 
+    public static void DeleteAll()
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+      SqlCommand cmd = new SqlCommand("DELETE FROM stylists;", conn);
+      cmd.ExecuteNonQuery();
+      conn.Close();
+    }
   }
 }
