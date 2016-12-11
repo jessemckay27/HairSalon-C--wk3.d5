@@ -21,6 +21,16 @@ namespace HairSalonProject
     }
 
     [Fact]
+    public void Test_Equal_ReturnsTrueForSameName()
+    {
+      Stylist newStylist = new Stylist("Bob Weir");
+      Stylist newStylist2 = new Stylist("Bob Weir");
+
+      Assert.Equal(newStylist, newStylist2);
+    }
+
+
+    [Fact]
     public void Test_Save_SavesStylistToDatabase()
     {
       Stylist newStylist = new Stylist("Jerry Garcia");
