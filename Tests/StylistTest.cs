@@ -36,10 +36,10 @@ namespace HairSalonProject
       Stylist newStylist = new Stylist("Jerry Garcia");
       newStylist.Save();
 
-      List<Stylist> result = Stylist.GetAll();
+      List<Stylist> resultList = Stylist.GetAll();
       List<Stylist> testList = new List<Stylist>{newStylist};
 
-      Assert.Equal(testList, result);
+      Assert.Equal(testList, resultList);
     }
 
     [Fact]

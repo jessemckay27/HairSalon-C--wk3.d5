@@ -33,7 +33,7 @@ namespace HairSalonProject
         int clientId = rdr.GetInt32(0);  //placeholder for id from database
         string clientName = rdr.GetString(1);  //placeholder for name from database
         int stylistId = rdr.GetInt32(2);
-        Client newClient = new Client(clientName, stylistId);  //constructor for new stylist with info passed
+        Client newClient = new Client(clientName, stylistId, clientId);  //constructor for new stylist with info passed
         allClients.Add(newClient);  // adds the new stylist to the empty list of stylists
       }
 
@@ -57,7 +57,7 @@ namespace HairSalonProject
 
       SqlCommand cmd = new SqlCommand("INSERT INTO clients (name, stylistId) OUTPUT INSERTED.id VALUES (@ClientName, @StylistId);", conn);
 
-      SqlParameter nameParameter = new SqlParameter();
+      SqlParameter nameParameter = new SqlParameter(); //creates new parameter object
       nameParameter.ParameterName = "@ClientName";   //sets paramater objects Name parameter
       nameParameter.Value = this.GetName();   //sets paramaeter objects Value parameter
       cmd.Parameters.Add(nameParameter);  //sets cmd object paramaters and calls Add to pass them

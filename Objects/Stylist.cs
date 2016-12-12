@@ -26,8 +26,6 @@ namespace HairSalonProject
       SqlCommand cmd = new SqlCommand("SELECT * FROM stylists;", conn);  //creates sql command object, gets all info from stylists;
       SqlDataReader rdr = cmd.ExecuteReader();    //creates object to execute commands
 
-      // string name = null;  //sets name as null in case of empty
-
       while(rdr.Read())   //loop for execute
       {
         string stylistName = rdr.GetString(1);  //placeholder for name from database
@@ -171,7 +169,7 @@ namespace HairSalonProject
       }
     }
 
-    public override int GetHashCode()  
+    public override int GetHashCode()
     {
       return _name.GetHashCode();
     }
