@@ -69,17 +69,16 @@ namespace HairSalonProject
     public void Test_Delete_Deletes_Stylist_FromDatabase()
     {
 
-      Client testClient1 = new Client("Dinese", 1);
-      testClient1.Save();
-      Client testClient2 = new Client("Damian", 2);
-      testClient2.Save();
+      Client newClient1 = new Client("Peter Griffin", 1); // make new client
+      newClient1.Save();  // save new client to DB
+      Client newClient2 = new Client("Stewie Griffin", 2); //make new client
+      newClient2.Save();  // save new client to DB
 
-      //Act
-      testClient1.Delete();
-      List<Client> resultClients = Client.GetAll();
-      List<Client> testClientList = new List<Client> {testClient2};
+      newClient1.Delete();  //delete client 1
+      List<Client> deletedClientList = Client.GetAll();  //make list wit all clients, only client 2 should be left
+      List<Client> literalClientList = new List<Client> {newClient2};  //make literal list with only client 2
 
-      Assert.Equal(testClientList, resultClients);
+      Assert.Equal(deletedClientList, literalClientList);  //compare lists to be equal
     }
 
 
