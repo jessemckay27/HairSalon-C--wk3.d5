@@ -113,14 +113,40 @@ namespace HairSalonProject
       return foundStylist;
     }
 
-    public static void DeleteAll()
+    public List<Client> GetClients()
     {
       SqlConnection conn = DB.Connection();
       conn.Open();
-      SqlCommand cmd = new SqlCommand("DELETE FROM stylists;", conn);
-      cmd.ExecuteNonQuery();
-      conn.Close();
+
+      SqlCommand cmd = new SqlCommand("SELECT * FROM clients WHERE stylistId = @StylistId;", conn);
+      SqlParameter stylistIdParameter = new SqlParameter();
+      stylistIdParameter.ParameterName = "@StylistId";
+      stylistIdParameter.Value = this.GetId();
+      cmd.Parameters.Add(stylistIdParameter);
+      SqlDataReader rdr = cmd.ExecuteReader();
+
+      List<Client> clients = new List<Client> {};
+      while(rdr.Read())
+      {
+        string clientName = rdr.GetString(0);
+        int clientId = rdr.GetInt32(1);
+        int clientStylistId = rdr.GetInt32(2);
+        Client newClient = new Client(clientName, clientStylistId, clientId);
+        clients.Add(newClient);
+      }
+      if (rdr != null)
+      {
+        rdr.Close();
+      }
+      if (conn != null)
+      {
+        conn.Close();
+      }
+      return clients;
     }
+
+
+
 
     public int GetId()  //getter for stylist id
     {
@@ -150,6 +176,15 @@ namespace HairSalonProject
     public override int GetHashCode()  //overrides hash code default behavior
     {
       return _name.GetHashCode();
+    }
+
+    public static void DeleteAll()
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+      SqlCommand cmd = new SqlCommand("DELETE FROM stylists;", conn);
+      cmd.ExecuteNonQuery();
+      conn.Close();
     }
   }
 }

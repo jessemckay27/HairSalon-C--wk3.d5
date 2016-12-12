@@ -51,10 +51,10 @@ namespace HairSalonProject
 
       Stylist savedStylist = Stylist.GetAll()[0];
 
-      int result = savedStylist.GetId();
+      int resultId = savedStylist.GetId();
       int testId = testStylist.GetId();
 
-      Assert.Equal(testId, result);
+      Assert.Equal(resultId, testId);
     }
 
     [Fact]
@@ -68,12 +68,6 @@ namespace HairSalonProject
       Assert.Equal(newStylist, foundStylist);
     }
 
-    public void Dispose()
-    {
-      // Client.DeleteAll();
-      Stylist.DeleteAll();
-    }
-
     [Fact]
     public void Test_Find_GetClientsOfStylist()
     {
@@ -81,10 +75,20 @@ namespace HairSalonProject
       newStylist.Save();
 
       Client newClient1 = new Client("Donald Trump", newStylist.GetId());
+      newClient1.Save();
       Client newClient2 = new Client("Hillary Clinton", newStylist.GetId());
-
-      List<Client> testClientList = new List<Client> {newClient1, newClient2};
+      newClient2.Save();
+      
       List<Client> resultClientList = newStylist.GetClients();
+      List<Client> testClientList = new List<Client> {newClient1, newClient2};
+
+      Assert.Equal(resultClientList, testClientList);
+    }
+
+    public void Dispose()
+    {
+      Client.DeleteAll();
+      Stylist.DeleteAll();
     }
   }
 }
