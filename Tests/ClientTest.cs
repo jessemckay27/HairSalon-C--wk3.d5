@@ -42,15 +42,28 @@ namespace HairSalonProject
     }
 
     [Fact]
-      public void Test_ToFind_Client_InDatabase()
-      {
-        Client newClient = new Client("Bill Kreutzman", 1);
-        newClient.Save();
+    public void Test_ToFind_Client_InDatabase()
+    {
+      Client newClient = new Client("Bill Kreutzman", 1);
+      newClient.Save();
 
-        Client foundClient = Client.Find(newClient.GetId());
+      Client foundClient = Client.Find(newClient.GetId());
 
-        Assert.Equal(foundClient, newClient);
-      }
+      Assert.Equal(foundClient, newClient);
+    }
+
+    public void Test_UpdatesClient_In_Database()
+    {
+      // string name = "Dwight";
+      Client testClient = new Client("Jesse McKay", 1);
+      testClient.Save();
+
+      string originalName = testClient.GetName();
+      testClient.Update("Natalie McKay");
+      string updatedName = testClient.GetName();
+
+      Assert.Equal(originalName, updatedName);
+    }
 
 
     public void Dispose()
