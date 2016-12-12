@@ -2,6 +2,7 @@
 <html>
   <head>
     <title>Hair Salon</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   </head>
   <body>
     <h1>Current Stylists</h2>
@@ -9,13 +10,14 @@
       @foreach(var stylist in Model)
       {
         <li>
-          <a href="/stylist/@stylist.GetId()">@stylist.GetName()</a>
-          <a href="/stylist/edit/@stylist.GetId()">Edit</a>
+          <a href="/stylist/@stylist.GetId()">@stylist.GetName()</a> |
+          <a href="/stylist/edit/@stylist.GetId()">Edit</a> |
           <a href="/stylist/delete/@stylist.GetId()">Delete</a>
         </li>
+        <br>
       }
     </ul>
-    <p><a href="/stylists/new">Add New Stylist</a></p>
+    <p><a href="/stylists/new">Add New Stylists</a></p>
     <p><a href="/">Home</a></p>
   </body>
 </html>
