@@ -98,6 +98,32 @@ namespace HairSalonProject
       Assert.Equal(updateName, newName);
     }
 
+    public void Test_DeleteStylistFromDatabase()
+    {
+      Stylist newStylist1 = new Stylist("Alexis McKay");  //make 1 new test stylist
+      newStylist1.Save();  //save test stylist
+
+      Stylist newStylist2 = new Stylist("Natalie McKay");  //make another new test stylist
+      newStylist2.Save();  //save test stylist
+
+      Client newClient1 = new Client("Some Guy", newStylist1.GetId()); //make new test client
+      newClient1.Save();  //save test client
+
+      Client newClient2 = new Client("Some Dude", newStylist2.GetId());  // make another test client
+      newClient1.Save();  //save test client
+
+      newStylist1.Delete();  //delete test stylist 1
+      List<Stylist> allStylists = Stylist.GetAll();  //list of all stylists, only 2nd should be there
+      List<Stylist> resultStylists = new List<Stylist> {newStylist2};  //make literal list of stylists, add in 2nd stylist only
+
+      List<Client> allClients = Client.GetAll();  //make list of all clients, only 2nd should be there
+      List<Client> resultClients = new List<Client> {newClient2};  // make literal list of clients, add in 2nd client only
+
+      Assert.Equal(allStylists, resultStylists);  //compare the two equal lists
+      Assert.Equal(allClients, resultClients);  //compare the two equal lists
+
+    }
+
     public void Dispose()
     {
       Client.DeleteAll();

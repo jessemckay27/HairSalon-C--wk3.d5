@@ -88,8 +88,8 @@ namespace HairSalonProject
       cmd.Parameters.Add(stylistIdParameter);
       SqlDataReader rdr = cmd.ExecuteReader();
 
-      int foundStylistId = 0;
-      string foundStylistName =  null;
+      int foundStylistId = 0;  //not creating new object, so placeholders are needed
+      string foundStylistName =  null;   //not creating new object, so placeholders are needed
 
       while(rdr.Read())
       {
@@ -151,15 +151,16 @@ namespace HairSalonProject
 
       SqlCommand cmd = new SqlCommand("UPDATE stylists SET name = @UpdateName OUTPUT INSERTED.name WHERE id = @StylistId;", conn);
 
+      SqlParameter stylistIdParameter = new SqlParameter();
+      stylistIdParameter.ParameterName = "@StylistId";
+      stylistIdParameter.Value = this.GetId();
+      cmd.Parameters.Add(stylistIdParameter);
+      
       SqlParameter updateNameParameter = new SqlParameter();
       updateNameParameter.ParameterName = "@UpdateName";
       updateNameParameter.Value = updateName;
       cmd.Parameters.Add(updateNameParameter);
 
-      SqlParameter stylistIdParameter = new SqlParameter();
-      stylistIdParameter.ParameterName = "@StylistId";
-      stylistIdParameter.Value = this.GetId();
-      cmd.Parameters.Add(stylistIdParameter);
 
       SqlDataReader rdr = cmd.ExecuteReader();
 
