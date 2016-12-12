@@ -23,10 +23,10 @@ namespace HairSalonProject
     [Fact]
     public void Test_Equal_ReturnsTrueForSameName()
     {
-      Stylist newStylist = new Stylist("Bob Weir");
+      Stylist newStylist1 = new Stylist("Bob Weir");
       Stylist newStylist2 = new Stylist("Bob Weir");
 
-      Assert.Equal(newStylist, newStylist2);
+      Assert.Equal(newStylist1, newStylist2);
     }
 
 
