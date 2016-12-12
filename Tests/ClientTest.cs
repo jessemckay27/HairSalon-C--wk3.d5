@@ -30,7 +30,7 @@ namespace HairSalonProject
     }
 
     [Fact]
-    public void Test_Save_SavesClientToDatabase()
+    public void Test_SavesClientToDatabase()
     {
       Client newClient = new Client("Phil Lesh", 1);
       newClient.Save();
@@ -42,7 +42,7 @@ namespace HairSalonProject
     }
 
     [Fact]
-    public void Test_ToFind_Client_InDatabase()
+    public void Test_FindClientInDatabase()
     {
       Client newClient = new Client("Bill Kreutzman", 1);
       newClient.Save();
@@ -52,9 +52,9 @@ namespace HairSalonProject
       Assert.Equal(foundClient, newClient);
     }
 
-    public void Test_UpdatesClient_In_Database()
+    [Fact]
+    public void Test_UpdateClientNameInDatabase()
     {
-      // string name = "Dwight";
       Client testClient = new Client("Jesse McKay", 1);
       testClient.Save();
 
@@ -65,10 +65,28 @@ namespace HairSalonProject
       Assert.Equal(originalName, updatedName);
     }
 
+    [Fact]
+    public void Test_Delete_Deletes_Stylist_FromDatabase()
+    {
+
+      Client testClient1 = new Client("Dinese", 1);
+      testClient1.Save();
+      Client testClient2 = new Client("Damian", 2);
+      testClient2.Save();
+
+      //Act
+      testClient1.Delete();
+      List<Client> resultClients = Client.GetAll();
+      List<Client> testClientList = new List<Client> {testClient2};
+
+      Assert.Equal(testClientList, resultClients);
+    }
+
 
     public void Dispose()
     {
       Client.DeleteAll();
+
     }
   }
 }
