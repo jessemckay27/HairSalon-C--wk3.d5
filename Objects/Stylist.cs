@@ -126,10 +126,11 @@ namespace HairSalonProject
       SqlDataReader rdr = cmd.ExecuteReader();
 
       List<Client> clients = new List<Client> {};
+
       while(rdr.Read())
       {
-        string clientName = rdr.GetString(0);
-        int clientId = rdr.GetInt32(1);
+        int clientId = rdr.GetInt32(0);
+        string clientName = rdr.GetString(1);
         int clientStylistId = rdr.GetInt32(2);
         Client newClient = new Client(clientName, clientStylistId, clientId);
         clients.Add(newClient);
@@ -144,9 +145,6 @@ namespace HairSalonProject
       }
       return clients;
     }
-
-
-
 
     public int GetId()  //getter for stylist id
     {

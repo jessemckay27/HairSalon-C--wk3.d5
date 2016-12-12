@@ -10,7 +10,7 @@ namespace HairSalonProject
   {
     public StylistTest()
     {
-      DBConfiguration.ConnectionString = "Data Source=desktop-ddsnb9e;Initial Catalog=hair_salon;Integrated Security=SSPI";
+      DBConfiguration.ConnectionString = "Data Source=desktop-ddsnb9e;Initial Catalog=hair_salon_test;Integrated Security=SSPI";
     }
 
     [Fact]
@@ -78,9 +78,9 @@ namespace HairSalonProject
       newClient1.Save();
       Client newClient2 = new Client("Hillary Clinton", newStylist.GetId());
       newClient2.Save();
-      
-      List<Client> resultClientList = newStylist.GetClients();
+
       List<Client> testClientList = new List<Client> {newClient1, newClient2};
+      List<Client> resultClientList = newStylist.GetClients();
 
       Assert.Equal(resultClientList, testClientList);
     }
