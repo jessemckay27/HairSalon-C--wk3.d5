@@ -58,7 +58,7 @@ namespace HairSalonProject
     }
 
     [Fact]
-    public void Test_Find_FindsStylistInDatabase()
+    public void Test_FindsStylistInDatabase()
     {
       Stylist newStylist = new Stylist("Jerry Garcia");
       newStylist.Save();
@@ -100,27 +100,27 @@ namespace HairSalonProject
 
     public void Test_DeleteStylistFromDatabase()
     {
-      Stylist newStylist1 = new Stylist("Alexis McKay");  //make 1 new test stylist
-      newStylist1.Save();  //save test stylist
+      Stylist newStylist1 = new Stylist("Alexis McKay");
+      newStylist1.Save();
 
-      Stylist newStylist2 = new Stylist("Natalie McKay");  //make another new test stylist
-      newStylist2.Save();  //save test stylist
+      Stylist newStylist2 = new Stylist("Natalie McKay");
+      newStylist2.Save();
 
-      Client newClient1 = new Client("Some Guy", newStylist1.GetId()); //make new test client
+      Client newClient1 = new Client("Some Guy", newStylist1.GetId());
       newClient1.Save();  //save test client
 
-      Client newClient2 = new Client("Some Dude", newStylist2.GetId());  // make another test client
-      newClient1.Save();  //save test client
+      Client newClient2 = new Client("Some Dude", newStylist2.GetId());
+      newClient1.Save();
 
-      newStylist1.Delete();  //delete test stylist 1
-      List<Stylist> allStylists = Stylist.GetAll();  //list of all stylists, only 2nd should be there
-      List<Stylist> resultStylists = new List<Stylist> {newStylist2};  //make literal list of stylists, add in 2nd stylist only
+      newStylist1.Delete();
+      List<Stylist> allStylists = Stylist.GetAll();
+      List<Stylist> resultStylists = new List<Stylist> {newStylist2};
 
-      List<Client> allClients = Client.GetAll();  //make list of all clients, only 2nd should be there
-      List<Client> resultClients = new List<Client> {newClient2};  // make literal list of clients, add in 2nd client only
+      List<Client> allClients = Client.GetAll();
+      List<Client> resultClients = new List<Client> {newClient2};
 
-      Assert.Equal(allStylists, resultStylists);  //compare the two equal lists
-      Assert.Equal(allClients, resultClients);  //compare the two equal lists
+      Assert.Equal(allStylists, resultStylists);
+      Assert.Equal(allClients, resultClients);
 
     }
 

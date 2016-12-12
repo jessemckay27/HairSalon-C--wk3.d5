@@ -7,59 +7,59 @@ namespace HairSalonProject
 {
   public class Stylist
   {
-    private string _name;  //placeholder
-    private int _id;  //placeholder
+    private string _name;
+    private int _id;
 
-    public Stylist(string name, int id = 0)  //constructor
+    public Stylist(string name, int id = 0)
     {
       _name = name;
       _id = id;
     }
 
-    public static List<Stylist> GetAll()  //makes list of all stylists
+    public static List<Stylist> GetAll()
     {
-      List<Stylist> allStylists = new List<Stylist>{};  //creates empty list to hold stylists
+      List<Stylist> allStylists = new List<Stylist>{};
 
-      SqlConnection conn = DB.Connection();  //creates connection object
-      conn.Open();  //opens connection
+      SqlConnection conn = DB.Connection();
+      conn.Open();
 
-      SqlCommand cmd = new SqlCommand("SELECT * FROM stylists;", conn);  //creates sql command object, gets all info from stylists;
-      SqlDataReader rdr = cmd.ExecuteReader();    //creates object to execute commands
+      SqlCommand cmd = new SqlCommand("SELECT * FROM stylists;", conn);
+      SqlDataReader rdr = cmd.ExecuteReader();
 
-      while(rdr.Read())   //loop for execute
+      while(rdr.Read())
       {
-        string stylistName = rdr.GetString(1);  //placeholder for name from database
-        int stylistId = rdr.GetInt32(0);  //placeholder for id from database
-        Stylist newStylist = new Stylist(stylistName, stylistId);  //constructor for new stylist with info passed
-        allStylists.Add(newStylist);  // adds the new stylist to the empty list of stylists
+        string stylistName = rdr.GetString(1);
+        int stylistId = rdr.GetInt32(0);
+        Stylist newStylist = new Stylist(stylistName, stylistId);
+        allStylists.Add(newStylist);
       }
 
       if (rdr != null)
       {
-        rdr.Close();  //closes reader object when done
+        rdr.Close();
       }
 
       if (conn != null)
       {
-        conn.Close();  //closes connection when done
+        conn.Close();
       }
 
-      return allStylists;  //returns list of stylists
+      return allStylists;
     }
 
     public void Save()
     {
-      SqlConnection conn = DB.Connection();  //creates connection object
-      conn.Open();  //opens connection
+      SqlConnection conn = DB.Connection();
+      conn.Open();
 
-      SqlCommand cmd = new SqlCommand("INSERT INTO stylists (name) OUTPUT INSERTED.id VALUES (@StylistName);", conn);  //creates new cmd object to add database values
+      SqlCommand cmd = new SqlCommand("INSERT INTO stylists (name) OUTPUT INSERTED.id VALUES (@StylistName);", conn);
 
       SqlParameter nameParameter = new SqlParameter();
-      nameParameter.ParameterName = "@StylistName";   //sets paramater objects Name parameter
-      nameParameter.Value = this.GetName();   //sets paramaeter objects Value parameter
-      cmd.Parameters.Add(nameParameter);  //sets cmd object paramaters and calls Add to pass them
+      nameParameter.ParameterName = "@StylistName";
+      nameParameter.Value = this.GetName();
+      cmd.Parameters.Add(nameParameter);
 
-      SqlDataReader rdr = cmd.ExecuteReader();  //creates object to execute commands
+      SqlDataReader rdr = cmd.ExecuteReader();
 
 
       while(rdr.Read())
@@ -78,7 +78,7 @@ namespace HairSalonProject
 
     public static Stylist Find(int id)
     {
-      SqlConnection conn = DB.Connection();  //creates connection object
+      SqlConnection conn = DB.Connection();
       conn.Open();
 
       SqlCommand cmd = new SqlCommand("SELECT * FROM stylists WHERE id = @StylistId;", conn);
@@ -88,8 +88,8 @@ namespace HairSalonProject
       cmd.Parameters.Add(stylistIdParameter);
       SqlDataReader rdr = cmd.ExecuteReader();
 
-      int foundStylistId = 0;  //not creating new object, so placeholders are needed
-      string foundStylistName =  null;   //not creating new object, so placeholders are needed
+      int foundStylistId = 0;
+      string foundStylistName =  null;
 
       while(rdr.Read())
       {
@@ -155,7 +155,7 @@ namespace HairSalonProject
       stylistIdParameter.ParameterName = "@StylistId";
       stylistIdParameter.Value = this.GetId();
       cmd.Parameters.Add(stylistIdParameter);
-      
+
       SqlParameter updateNameParameter = new SqlParameter();
       updateNameParameter.ParameterName = "@UpdateName";
       updateNameParameter.Value = updateName;
@@ -198,12 +198,12 @@ namespace HairSalonProject
       }
     }
 
-    public int GetId()  //getter for stylist id
+    public int GetId()
     {
       return _id;
     }
 
-    public string GetName()  //gett for stylist name
+    public string GetName()
     {
       return _name;
     }

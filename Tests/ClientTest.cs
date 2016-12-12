@@ -55,30 +55,30 @@ namespace HairSalonProject
     [Fact]
     public void Test_UpdateClientNameInDatabase()
     {
-      Client testClient = new Client("Jesse McKay", 1);  //create new client object
-      testClient.Save();  //save object
+      Client testClient = new Client("Jesse McKay", 1);
+      testClient.Save();
 
-      string originalName = testClient.GetName();  //set variable equal to object.name
-      testClient.Update("Natalie McKay"); //update object with new name
-      string updatedName = testClient.GetName();  //set another variable equal to updated object.name
+      string originalName = testClient.GetName();
+      testClient.Update("Natalie McKay");
+      string updatedName = testClient.GetName();
 
-      Assert.Equal(originalName, updatedName);  //compare equal names
+      Assert.Equal(originalName, updatedName);
     }
 
     [Fact]
-    public void Test_Delete_Deletes_Stylist_FromDatabase()
+    public void Test_Deletes_Stylist_FromDatabase()
     {
 
-      Client newClient1 = new Client("Peter Griffin", 1); // make new client
-      newClient1.Save();  // save new client to DB
-      Client newClient2 = new Client("Stewie Griffin", 2); //make new client
-      newClient2.Save();  // save new client to DB
+      Client newClient1 = new Client("Peter Griffin", 1);
+      newClient1.Save();
+      Client newClient2 = new Client("Stewie Griffin", 2);
+      newClient2.Save();
 
-      newClient1.Delete();  //delete client 1
-      List<Client> deletedClientList = Client.GetAll();  //make list wit all clients, only client 2 should be left
-      List<Client> literalClientList = new List<Client> {newClient2};  //make literal list with only client 2
+      newClient1.Delete();
+      List<Client> deletedClientList = Client.GetAll();
+      List<Client> literalClientList = new List<Client> {newClient2};
 
-      Assert.Equal(deletedClientList, literalClientList);  //compare lists to be equal
+      Assert.Equal(deletedClientList, literalClientList);
     }
 
     public void Dispose()

@@ -20,54 +20,54 @@ namespace HairSalonProject
 
     public static List<Client> GetAll()
     {
-      List<Client> allClients = new List<Client>{};  //creates empty list to hold stylists
+      List<Client> allClients = new List<Client>{};
 
-      SqlConnection conn = DB.Connection();  //creates connection object
-      conn.Open();  //opens connection
+      SqlConnection conn = DB.Connection();
+      conn.Open();
 
-      SqlCommand cmd = new SqlCommand("SELECT * FROM clients;", conn);  //creates sql command object, gets all info from stylists;
-      SqlDataReader rdr = cmd.ExecuteReader();    //creates object to execute commands
+      SqlCommand cmd = new SqlCommand("SELECT * FROM clients;", conn);
+      SqlDataReader rdr = cmd.ExecuteReader();
 
-      while(rdr.Read())   //loop for execute
+      while(rdr.Read())
       {
-        int clientId = rdr.GetInt32(0);  //placeholder for id from database
-        string clientName = rdr.GetString(1);  //placeholder for name from database
+        int clientId = rdr.GetInt32(0);
+        string clientName = rdr.GetString(1);
         int stylistId = rdr.GetInt32(2);
-        Client newClient = new Client(clientName, stylistId, clientId);  //constructor for new stylist with info passed
-        allClients.Add(newClient);  // adds the new stylist to the empty list of stylists
+        Client newClient = new Client(clientName, stylistId, clientId);
+        allClients.Add(newClient);
       }
 
       if (rdr != null)
       {
-        rdr.Close();  //closes reader object when done
+        rdr.Close();
       }
 
       if (conn != null)
       {
-        conn.Close();  //closes connection when done
+        conn.Close();
       }
 
-      return allClients;  //returns list of stylists
+      return allClients;
     }
 
     public void Save()
     {
-      SqlConnection conn = DB.Connection();  //creates connection object
-      conn.Open();  //opens connection
+      SqlConnection conn = DB.Connection();
+      conn.Open();
 
       SqlCommand cmd = new SqlCommand("INSERT INTO clients (name, stylistId) OUTPUT INSERTED.id VALUES (@ClientName, @StylistId);", conn);
 
-      SqlParameter nameParameter = new SqlParameter(); //creates new parameter object
-      nameParameter.ParameterName = "@ClientName";   //sets paramater objects Name parameter
-      nameParameter.Value = this.GetName();   //sets paramaeter objects Value parameter
-      cmd.Parameters.Add(nameParameter);  //sets cmd object paramaters and calls Add to pass them
+      SqlParameter nameParameter = new SqlParameter();
+      nameParameter.ParameterName = "@ClientName";
+      nameParameter.Value = this.GetName();
+      cmd.Parameters.Add(nameParameter);
 
       SqlParameter stylistIdParameter = new SqlParameter();
-      stylistIdParameter.ParameterName = "@StylistId";   //sets paramater objects Name parameter
-      stylistIdParameter.Value = this.GetStylistId();   //sets paramaeter objects Value parameter
-      cmd.Parameters.Add(stylistIdParameter);  //sets cmd object paramaters and calls Add to pass them
+      stylistIdParameter.ParameterName = "@StylistId";
+      stylistIdParameter.Value = this.GetStylistId();
+      cmd.Parameters.Add(stylistIdParameter);
 
-      SqlDataReader rdr = cmd.ExecuteReader();  //creates object to execute commands
+      SqlDataReader rdr = cmd.ExecuteReader();
 
       while(rdr.Read())
       {
@@ -205,7 +205,7 @@ namespace HairSalonProject
       }
     }
 
-    public override int GetHashCode()  //overrides hash code default behavior
+    public override int GetHashCode()
     {
       return _name.GetHashCode();
     }
