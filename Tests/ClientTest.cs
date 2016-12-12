@@ -19,11 +19,10 @@ namespace HairSalonProject
       int result = Client.GetAll().Count;
       Assert.Equal(0, result);
     }
-    
+
     public void Dispose()
     {
       Client.DeleteAll();
-      Stylist.DeleteAll();
     }
   }
 }

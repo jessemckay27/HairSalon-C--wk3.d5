@@ -7,9 +7,9 @@ namespace HairSalonProject
 {
   public class Client
   {
-    private int _id;
-    private int _stylistId;
     private string _name;
+    private int _stylistId;
+    private int _id;
 
     public Client(string name, int stylistId, int id = 0)
     {
@@ -18,12 +18,44 @@ namespace HairSalonProject
       _id = id;
     }
 
+    public static List<Client> GetAll()
+    {
+      List<Client> allClients = new List<Client>{};  //creates empty list to hold stylists
+
+      SqlConnection conn = DB.Connection();  //creates connection object
+      conn.Open();  //opens connection
+
+      SqlCommand cmd = new SqlCommand("SELECT * FROM clients;", conn);  //creates sql command object, gets all info from stylists;
+      SqlDataReader rdr = cmd.ExecuteReader();    //creates object to execute commands
+
+      while(rdr.Read())   //loop for execute
+      {
+        int clientId = rdr.GetInt32(0);  //placeholder for id from database
+        string clientName = rdr.GetString(1);  //placeholder for name from database
+        int stylistId = rdr.GetInt32(2);
+        Client newClient = new Client(clientName, stylistId);  //constructor for new stylist with info passed
+        allClients.Add(newClient);  // adds the new stylist to the empty list of stylists
+      }
+
+      if (rdr != null)
+      {
+        rdr.Close();  //closes reader object when done
+      }
+
+      if (conn != null)
+      {
+        conn.Close();  //closes connection when done
+      }
+
+      return allClients;  //returns list of stylists
+    }
+
     public void Save()
     {
       SqlConnection conn = DB.Connection();  //creates connection object
       conn.Open();  //opens connection
 
-      SqlCommand cmd = new SqlCommand("INSERT INTO clients (name, stylistId) OUTPUT INSERTED.id VALUES (@ClientName, @StylistId);", conn);  //creates new cmd object to add database values
+      SqlCommand cmd = new SqlCommand("INSERT INTO clients (name, stylistId) OUTPUT INSERTED.id VALUES (@ClientName, @StylistId);", conn);
 
       SqlParameter nameParameter = new SqlParameter();
       nameParameter.ParameterName = "@ClientName";   //sets paramater objects Name parameter
@@ -77,9 +109,9 @@ namespace HairSalonProject
       {
         Client newClient = (Client) otherClient;
         bool nameEquality = this.GetName() == newClient.GetName();
-        bool idEquality = this.GetId() == newClient.GetId();
         bool stylistEquality = this.GetStylistId() == newClient.GetStylistId();
-        return(nameEquality && idEquality && stylistEquality);
+        bool idEquality = this.GetId() == newClient.GetId();
+        return (nameEquality && stylistEquality && idEquality);
       }
     }
 

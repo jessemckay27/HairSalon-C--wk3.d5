@@ -171,7 +171,7 @@ namespace HairSalonProject
       }
     }
 
-    public override int GetHashCode()  //overrides hash code default behavior
+    public override int GetHashCode()  
     {
       return _name.GetHashCode();
     }
