@@ -121,7 +121,6 @@ namespace HairSalonProject
 
       Assert.Equal(allStylists, resultStylists);
       Assert.Equal(allClients, resultClients);
-
     }
 
     public void Dispose()
