@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Hair Salon</title>
+  </head>
+  <body>
+    <h1>Add New Client</h1>
+    <p>Which stylist do you want to add a client to?</p>
+    <form action="/clients/new" method="post">
+      <div class="form-group">
+        <select name="id">
+          @foreach(var stylist in Model)
+          {
+            <option value="@stylist.GetId()">@stylist.GetName()</option>
+          }
+        </select>
+      </div>
+      <p>What is the clients name?</p>
+      <div class="form-group">
+        <label for="name"></label>
+        <input class="form-control" name="name" type="text">
+      </div>
+      <br>
+      <button type="submit" class="btn btn-primary">Add a client</button>
+    </form>
+    <p><a href "/stylists">View Stylists</a></p>
+    <p><a href="/">Home</a></p>
+  </body>
+</html>

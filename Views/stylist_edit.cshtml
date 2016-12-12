@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Hair Salon</title>
+  </head>
+  <body>
+    <h2>Edit Name: @Model.GetName()</h2>
+    <p>What would you like the new name to be?</p>
+    <form action="/stylist/edit/@Model.GetId()" method="post">
+      <div class="form-group">
+        <input type="hidden" name="_method" value="PATCH">
+      </div>
+      <div class="form-group">
+        <input name="id" type="hidden" value="@Model.GetId()">
+        <label for="name">New Name:</label>
+        <input name="name" type="text">
+      </div>
+      <button type="submit" class="btn">Submit</button>
+    </form>
+    <p><a href "/stylists">View All Stylists</a></p>
+    <p><a href="/">Home</a></p>
+  </body>
+</html>

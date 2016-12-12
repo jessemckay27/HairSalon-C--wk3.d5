@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
     <title>Hair Salon</title>
   </head>
   <body>
@@ -9,7 +8,11 @@
     <ul>
       @foreach(var stylist in Model)
       {
-        <li><a href="/stylist/@stylist.GetId()">@stylist.GetName()</a> | <a href="/stylist/edit/@stylist.GetId()">Edit</a> | <a href="/stylist/delete/@stylist.GetId()">Delete</a></li>
+        <li>
+          <a href="/stylist/@stylist.GetId()">@stylist.GetName()</a>
+          <a href="/stylist/edit/@stylist.GetId()">Edit</a>
+          <a href="/stylist/delete/@stylist.GetId()">Delete</a>
+        </li>
       }
     </ul>
     <p><a href="/stylists/new">Add New Stylist</a></p>

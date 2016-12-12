@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Hair Salon</title>
+  </head>
+  <body>
+    <h1>Stylist: @Model.GetName()</h4>
+    <h3>Current Clients:</h3>
+
+    <ul>
+    @foreach(var client in Model.GetClients())
+    {
+      <li>
+        <a href="/client-edit/@client.GetId()">@client.GetName()</a>
+        <a href="/client-delete/@client.GetId()">Delete</a>
+      </li>
+    }
+    </ul>
+
+    <a href="/">Home</a>
+  </body>
+</html>
