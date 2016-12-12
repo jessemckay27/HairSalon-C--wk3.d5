@@ -55,14 +55,14 @@ namespace HairSalonProject
     [Fact]
     public void Test_UpdateClientNameInDatabase()
     {
-      Client testClient = new Client("Jesse McKay", 1);
-      testClient.Save();
+      Client testClient = new Client("Jesse McKay", 1);  //create new client object
+      testClient.Save();  //save object
 
-      string originalName = testClient.GetName();
-      testClient.Update("Natalie McKay");
-      string updatedName = testClient.GetName();
+      string originalName = testClient.GetName();  //set variable equal to object.name
+      testClient.Update("Natalie McKay"); //update object with new name
+      string updatedName = testClient.GetName();  //set another variable equal to updated object.name
 
-      Assert.Equal(originalName, updatedName);
+      Assert.Equal(originalName, updatedName);  //compare equal names
     }
 
     [Fact]
@@ -81,11 +81,9 @@ namespace HairSalonProject
       Assert.Equal(deletedClientList, literalClientList);  //compare lists to be equal
     }
 
-
     public void Dispose()
     {
       Client.DeleteAll();
-
     }
   }
 }
