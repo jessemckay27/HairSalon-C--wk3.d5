@@ -26,13 +26,11 @@ _This page allows the user to interact with a database for a Hair Salon, allowin
 | Test if client deleted from database      | Delete    | 0         |
 
 ## Setup Instructions
-* User must have access to a Windows operating system
-* Visit GitHub and search for the user "jessemckay27"
 * Clone the repository "HairSalon-C--wk3.d5" to your computer
 * Open Windows PowerShell
 * Using Powershell, navigate to the folder where you downloaded the repository
-* Run the command "dnu restore" in PowerShell
-* Run the command "dnx kestrel" in PowerShell
+* Type the following commands to connect to sql command:  sqlcmd -S "(localdb)\mssqllocaldb
+
 * Type the following commands to create the databases:
 *  _CREATE DATABASE hair_salon;_
 *  _GO_
@@ -51,6 +49,12 @@ _This page allows the user to interact with a database for a Hair Salon, allowin
 *  _GO_
 *  _CREATE TABLE clients (id INT IDENTITY(1,1) PRIMARY KEY, name VARCHAR(255), stylistId INT);_
 *  _GO_
+
+
+* Run the command "dnu restore" in PowerShell
+* To run the tests, type the command: "dnx test" into PowerShell
+
+* To view the site in your browser, run the command "dnx kestrel" in PowerShell
 * Open your web browser and enter "localhost:5004" into the web address bar
 * After the page loads, use the links to add, edit and delete the stylists and clients
 
