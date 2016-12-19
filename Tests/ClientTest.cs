@@ -89,6 +89,7 @@ namespace HairSalonProject
     public void Dispose()
     {
       Client.DeleteAll();
+      Stylist.DeleteAll();
     }
   }
 }
