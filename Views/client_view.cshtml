@@ -8,18 +8,7 @@
   <body>
     <div class="container">
       <div class="col-md-8">
-        <h1>Stylist: @Model.GetName()</h4>
-        <h3>Current Clients:</h3>
-        <ul>
-        @foreach(var client in Model.GetClients())
-        {
-          <li>
-            <a href="/client/@client.GetId()">@client.GetName()</a> |
-            <a href="/client_edit/@client.GetId()">Update</a> |
-            <a href="/client_delete/@client.GetId()">Delete</a>
-          </li>
-        }
-        </ul>
+        <h1>Your Client is: @Model.GetName()</h4>
         <p><a href="/clients/new">Add New Client</a></p>
         <p><a href="/">Home</a></p>
       </div>
