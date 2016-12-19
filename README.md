@@ -29,7 +29,7 @@ _This page allows the user to interact with a database for a Hair Salon, allowin
 * Clone the repository "HairSalon-C--wk3.d5" to your computer
 * Open Windows PowerShell
 * Using Powershell, navigate to the folder where you downloaded the repository
-* Type the following commands to connect to sql command:  sqlcmd -S "(localdb)\mssqllocaldb
+* Type the following commands to connect to sql command:  sqlcmd -S "(localdb)\mssqllocaldb"
 
 * Type the following commands to create the databases:
 *  _CREATE DATABASE hair_salon;_
