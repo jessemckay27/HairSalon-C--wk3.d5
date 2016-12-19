@@ -10,8 +10,8 @@ namespace HairSalonProject
   {
     public StylistTest()
     {
-      DBConfiguration.ConnectionString = "Data Source=desktop-ddsnb9e;Initial Catalog=hair_salon_test;Integrated Security=SSPI";
-      // DBConfiguration.ConnectionString = "Data Source=(localdb)\\mssqllocaldb;Initial Catalog=hair_salon_test;Integrated Security=SSPI";
+      DBConfiguration.ConnectionString = "Data Source=(localdb)\\mssqllocaldb;Initial Catalog=hair_salon_test;Integrated Security=SSPI";
+      // DBConfiguration.ConnectionString = "Data Source=desktop-ddsnb9e;Initial Catalog=hair_salon_test;Integrated Security=SSPI";
     }
 
     [Fact]
@@ -29,7 +29,6 @@ namespace HairSalonProject
 
       Assert.Equal(newStylist1, newStylist2);
     }
-
 
     [Fact]
     public void Test_Save_SavesStylistToDatabase()

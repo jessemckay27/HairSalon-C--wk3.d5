@@ -50,8 +50,8 @@ _This page allows the user to interact with a database for a Hair Salon, allowin
 *  _CREATE TABLE clients (id INT IDENTITY(1,1) PRIMARY KEY, name VARCHAR(255), stylistId INT);_
 *  _GO_
 
-
 * Run the command "dnu restore" in PowerShell
+
 * To run the tests, type the command: "dnx test" into PowerShell
 
 * To view the site in your browser, run the command "dnx kestrel" in PowerShell
