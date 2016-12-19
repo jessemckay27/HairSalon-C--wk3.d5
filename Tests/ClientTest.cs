@@ -59,12 +59,15 @@ namespace HairSalonProject
     {
       Client testClient = new Client("Jesse McKay", 1);
       testClient.Save();
-
-      string originalName = testClient.GetName();
       testClient.Update("Natalie McKay");
-      string updatedName = testClient.GetName();
+      testClient.Save();
 
-      Assert.Equal(originalName, updatedName);
+      string updatedName = testClient.GetName();
+      string testName = "Natalie McKay";
+
+
+
+      Assert.Equal(updatedName, testName);
     }
 
     [Fact]
