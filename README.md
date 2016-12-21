@@ -38,7 +38,7 @@ _This page allows the user to interact with a database for a Hair Salon, allowin
 *  _GO_
 *  _CREATE TABLE stylists (id INT IDENTITY(1,1) PRIMARY KEY, name VARCHAR(255));_
 *  _GO_
-*  _CREATE TABLE clients (id INT IDENTITY(1,1) PRIMARY KEY, name VARCHAR(255), stylistId INT);_
+*  _CREATE TABLE clients (id INT IDENTITY(1,1) PRIMARY KEY, name VARCHAR(255), stylist_id INT);_
 *  _GO_
 
 *  _CREATE DATABASE hair_salon_test;_
@@ -47,7 +47,7 @@ _This page allows the user to interact with a database for a Hair Salon, allowin
 *  _GO_
 *  _CREATE TABLE stylists (id INT IDENTITY(1,1) PRIMARY KEY, name VARCHAR(255));_
 *  _GO_
-*  _CREATE TABLE clients (id INT IDENTITY(1,1) PRIMARY KEY, name VARCHAR(255), stylistId INT);_
+*  _CREATE TABLE clients (id INT IDENTITY(1,1) PRIMARY KEY, name VARCHAR(255), stylist_id INT);_
 *  _GO_
 
 * Run the command "dnu restore" in PowerShell
